@@ -5,16 +5,18 @@ export default function Home() {
     'perspective(500px) scale(1) rotateX(0deg) rotateY(0deg)'
   );
 
-  function handleMove(e) {
+  function calculateDegrees(e) {
     const rect = e.currentTarget.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
     const rotateY = 20 * ((x - rect.width / 2) / rect.width);
     const rotateX = -20 * ((y - rect.height / 2) / rect.height);
     setTransform(`perspective(500px) scale(1.1) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`);
+    return [rotateX, rotateY]
   }
 
   function handleLeave() {
+    const [rotateX, rotateY] = calculateDegrees(e)
     setTransform('perspective(500px) scale(1) rotateX(0deg) rotateY(0deg)');
   }
   function handleDown() {
